@@ -19,7 +19,7 @@ class Monkey:
     def play(self):
         self.number_of_inspects += 1
         item_to_play = self.items.pop(0)
-        new_value = math.floor((eval(self.operation.replace("old", str(item_to_play)))))
+        new_value = math.floor((eval(self.operation.replace("old", str(item_to_play))))/3)
         if (int(new_value) % int(self.test)) == 0:
             return self.dest_true, new_value
         else:
@@ -33,7 +33,7 @@ class Monkey:
 
 lines = open("input.txt", "r").read().split("\n\n")
 monkeys = []
-rounds = 10000
+rounds = 20
 list = []
 pops = 2
 
@@ -66,7 +66,7 @@ for i in range(rounds):
             dest, value = monkey.play()
             monkeys[int(dest)].give_item(value)
     
-    if i % 1000 == 0:
+    if i % 10 == 0:
         print(f'Round {i}:')
         for monkey in monkeys:
             print(monkey) 
